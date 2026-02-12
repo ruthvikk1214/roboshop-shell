@@ -1,24 +1,31 @@
 #!/bin/bash
 
-SG_ID="sg-0eec592803ede7730"
-AMI_ID="ami-0220d79f3f480ecf5"
+SG_ID="sg-0eec592803ede7730"   # replace with your ID
+AMI_ID="ami-0220d79f5f488ecf5"
 
-for INSTANCE in $@
+for instance in $@
 do
-    instance_id = $(aws ec2 run-instances \
+  INSTANCE_ID=$( aws ec2 run-instances \
     --image-id $AMI_ID \
-    --instance-type "t3.micro"
+    --instance-type "t3.micro" \
     --security-group-ids $SG_ID \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$INSTANCE}]" \
-    --query 'Instances[0].InstanceID' \
-    --output text
-)
-if [ $INSTANCE == "frontend" ]; then
-IP=$(
-    aws ec2 describe-instances \
-    --instance-ids $instance_id
-    --query 'Reservations[].Instances[].PublicIpAddress' \
-    --output text
-)
+    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
+    --query 'Instances[0].InstanceId' \
+    --output text )
 
+  if [ $instance == "frontend" ]; then
+    IP=$(
+      aws ec2 describe-instances \
+        --instance-ids $INSTANCE_ID \
+        --query 'Reservations[].Instances[].PublicIpAddress' \
+        --output text
+    )
+  else
+    IP=$(
+      aws ec2 describe-instances \
+        --instance-ids $INSTANCE_ID \
+        --query 'Reservations[].Instances[].PrivateIpAddress' \
+        --output text
+    )
+  fi
 done
