@@ -27,3 +27,13 @@ VALIDATE(){
     fi
 }
 
+dnf install rabbitmq-server -y
+VALIDATE $? "installing rabbitmq"
+
+systemctl enable rabbitmq-server
+systemctl start rabbitmq-server
+VALIDATE $? "enabling and starting mabbitmq"
+
+rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+VALIDATE $? "creating a user named roboshop for the app"
