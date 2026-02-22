@@ -49,7 +49,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 VALIDATE $? "Extracting the frontend content"
 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/default.d/roboshop.conf
 VALIDATE $? "Copied nginx conf file"
 
 systemctl restart nginx
