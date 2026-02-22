@@ -8,7 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
-$MONGODBHOST="mongodb.rk1214.in"
+$MONGODBHOST=mongodb.rk1214.in
 
 
 if [ $USERID -ne 0 ]; then
