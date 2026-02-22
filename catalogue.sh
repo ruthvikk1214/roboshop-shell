@@ -8,6 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
+$MONGODBHOST="mongodb.rk1214.in"
 
 
 if [ $USERID -ne 0 ]; then
@@ -75,3 +76,8 @@ VALIDATE $? " Enabling the catalogue service"
 
 systemctl start catalogue
 VALIDATE $? "Starting the catalogue service"
+
+
+dnf install mongodb-mongosh -y
+
+mongosh --host $MONGODBHOST </app/db/master-data.js
