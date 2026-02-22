@@ -51,8 +51,11 @@ mvn clean package
 mv target/shipping-1.0.jar shipping.jar 
 VALIDATE $? "Downloading dependencies and building the app"
 
+cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? "Copying shipping service file"
+
 systemctl daemon-reload
-VALIDATE $? " Reloading the daemon"
+VALIDATE $? "Reloading the daemon"
 
 systemctl enable shipping 
 systemctl start shipping
