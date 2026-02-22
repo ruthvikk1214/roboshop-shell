@@ -42,7 +42,7 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 VALIDATE $? " Downloading the code"
 
 cd /app 
-Validate $? "Moving to app directory"
+VALIDATE $? "Moving to app directory"
 
 unzip /tmp/catalogue.zip
 VALIDATE $? "Unzipping the app files in app directory"
