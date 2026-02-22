@@ -1,7 +1,7 @@
     #!/bin/bash
 
     SG_ID="sg-0eec592803ede7730"   # replace with your ID
-    AMI_ID="ami-0e349888043265b96"
+    AMI_ID="ami-0220d79f3f480ecf5"
     ZONE_ID="Z031906510N5GWM6MW07L"
     DOMAIN_NAME="rk1214.in"
     
