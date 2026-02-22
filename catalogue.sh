@@ -77,8 +77,9 @@ VALIDATE $? " Enabling the catalogue service"
 systemctl start catalogue
 VALIDATE $? "Starting the catalogue service"
 
-
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y
+VALIDATE $? "Installing mongo db"
 
 mongosh --host $MONGODB_HOST --quiet 'db.getMongo().getDBNames().indexOf("mydb")'
 mongosh --host $MONGODB_HOST </app/db/master-data.js
