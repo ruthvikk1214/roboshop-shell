@@ -58,3 +58,15 @@ cd /app
 
 npm install 
 VALIDATE $? " Downloading the dependencies"
+
+cp catalogue.service /etc/systemd/system/catalogue.service
+VALIDATE $? "Creating catalogue service"
+
+systemctl daemon-reload
+VALIDATE $? "Reloading the daemon"
+
+systemctl enable catalogue 
+VALIDATE $? " Enabling the catalogue service"
+
+systemctl start catalogue
+VALIDATE $? "Starting the catalogue service"
